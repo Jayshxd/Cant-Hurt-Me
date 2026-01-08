@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { TrendUp, TrendDown, Minus } from '@phosphor-icons/react';
+import { TrendUp, TrendDown, Equals } from '@phosphor-icons/react';
 import { cn } from '@/lib/utils';
 import { useEnergyStore } from '@/store/useEnergyStore';
 import { GlowCard } from './GlowCard';
@@ -40,14 +40,14 @@ export function StatsCard({ className }: StatsCardProps) {
   return (
     <GlowCard
       className={cn('p-4', className)}
-      glowColor={isCritical ? 'red' : 'cyan'}
+      glowColor={isCritical ? 'danger' : 'primary'}
     >
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <span className="text-xs font-mono text-gray-500 uppercase tracking-wider">
-          DAILY_METRICS
+        <span className="text-sm font-medium text-slate-600">
+          Today&apos;s Stats
         </span>
-        <span className="text-xs font-mono text-gray-600">
+        <span className="text-xs text-slate-400">
           {new Date().toLocaleDateString('en-US', {
             month: 'short',
             day: 'numeric',
@@ -56,68 +56,65 @@ export function StatsCard({ className }: StatsCardProps) {
       </div>
 
       {/* Stats grid */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="space-y-3">
         {/* Today's gains */}
-        <div className="text-center">
-          <div className="flex items-center justify-center gap-1 mb-1">
-            <TrendUp size={14} className="text-cyber-green" />
-            <span className="text-[10px] font-mono text-gray-500 uppercase">
-              GAINS
-            </span>
+        <div className="flex items-center justify-between p-3 bg-success-50 rounded-lg">
+          <div className="flex items-center gap-2">
+            <TrendUp size={18} className="text-success-600" />
+            <span className="text-sm text-slate-600">Gains</span>
           </div>
           <AnimatedNumber
             value={todayGains}
             prefix="+"
-            className="text-lg font-mono text-cyber-green"
+            className="text-lg font-semibold text-success-600"
           />
         </div>
 
         {/* Today's losses */}
-        <div className="text-center">
-          <div className="flex items-center justify-center gap-1 mb-1">
-            <TrendDown size={14} className="text-cyber-red" />
-            <span className="text-[10px] font-mono text-gray-500 uppercase">
-              LOSSES
-            </span>
+        <div className="flex items-center justify-between p-3 bg-danger-50 rounded-lg">
+          <div className="flex items-center gap-2">
+            <TrendDown size={18} className="text-danger-600" />
+            <span className="text-sm text-slate-600">Losses</span>
           </div>
           <AnimatedNumber
             value={todayLosses}
-            className="text-lg font-mono text-cyber-red"
+            className="text-lg font-semibold text-danger-600"
           />
         </div>
 
         {/* Net change */}
-        <div className="text-center">
-          <div className="flex items-center justify-center gap-1 mb-1">
-            <Minus size={14} className="text-gray-400" />
-            <span className="text-[10px] font-mono text-gray-500 uppercase">
-              NET
-            </span>
+        <div className={cn(
+          'flex items-center justify-between p-3 rounded-lg',
+          netChange > 0 ? 'bg-primary-50' : netChange < 0 ? 'bg-danger-50' : 'bg-slate-100'
+        )}>
+          <div className="flex items-center gap-2">
+            <Equals size={18} className="text-slate-500" />
+            <span className="text-sm text-slate-600">Net</span>
           </div>
           <motion.div
             animate={{
               color:
                 netChange > 0
-                  ? '#00ffff'
+                  ? '#0284c7'
                   : netChange < 0
-                  ? '#ff073a'
-                  : '#6b7280',
+                  ? '#dc2626'
+                  : '#64748b',
             }}
           >
             <AnimatedNumber
               value={netChange}
               prefix={netChange > 0 ? '+' : ''}
-              className="text-lg font-mono"
+              className="text-lg font-semibold"
             />
           </motion.div>
         </div>
       </div>
 
       {/* Activity count */}
-      <div className="mt-4 pt-3 border-t border-gray-800">
+      <div className="mt-4 pt-3 border-t border-slate-200">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-mono text-gray-500">TRANSACTIONS</span>
-          <span className="text-sm font-mono text-cyber-cyan">
+          <span className="text-sm text-slate-500">Activities today</span>
+          <span className="text-lg font-semibold text-primary-600">
             {todayLogs.length}
           </span>
         </div>

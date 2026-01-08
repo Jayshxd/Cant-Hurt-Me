@@ -3,14 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --background: #050505;
-  --foreground: #ededed;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f172a;
+    --foreground: #f8fafc;
+  }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-geist-mono), monospace;
+  font-family: var(--font-geist-sans), sans-serif;
 }
 
 /* Custom scrollbar */
@@ -24,12 +31,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 255, 255, 0.2);
+  background: rgba(15, 23, 42, 0.2);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 255, 255, 0.4);
+  background: rgba(15, 23, 42, 0.4);
 }
 
 /* Hide number input spinners */
@@ -45,8 +52,8 @@ input[type='number'] {
 
 /* Selection color */
 ::selection {
-  background: rgba(0, 255, 255, 0.3);
-  color: #00ffff;
+  background: rgba(14, 165, 233, 0.2);
+  color: #0284c7;
 }
 
 /* Focus styles */
@@ -55,16 +62,12 @@ input[type='number'] {
 }
 
 *:focus-visible {
-  outline: 1px solid rgba(0, 255, 255, 0.5);
+  outline: 2px solid #0ea5e9;
   outline-offset: 2px;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
-  }
-  
-  .bg-gradient-radial {
-    background: radial-gradient(circle at center, var(--tw-gradient-stops));
   }
 }
