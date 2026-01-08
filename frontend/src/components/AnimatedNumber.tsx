@@ -53,12 +53,12 @@ export function SlotNumber({ value, className, digitCount = 4 }: SlotNumberProps
   const isNegative = value < 0;
 
   return (
-    <div className={cn('flex items-center font-mono', className)}>
+    <div className={cn('flex items-center', className)}>
       {isNegative && (
         <motion.span
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
-          className="text-cyber-red"
+          className="text-danger-600"
         >
           -
         </motion.span>

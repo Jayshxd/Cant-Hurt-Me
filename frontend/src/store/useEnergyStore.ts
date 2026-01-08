@@ -31,7 +31,7 @@ export const useEnergyStore = create<EnergyState>()(
         let pointChange = config.points;
         
         // For spending, the amount is the negative points
-        if (type === 'RESOURCE_DEPLOY' && amount !== undefined) {
+        if (type === 'SPENDING' && amount !== undefined) {
           pointChange = -Math.abs(amount);
         }
 
@@ -40,7 +40,7 @@ export const useEnergyStore = create<EnergyState>()(
           type,
           points: pointChange,
           timestamp: new Date(),
-          amount: type === 'RESOURCE_DEPLOY' ? amount : undefined,
+          amount: type === 'SPENDING' ? amount : undefined,
         };
 
         set((state) => ({

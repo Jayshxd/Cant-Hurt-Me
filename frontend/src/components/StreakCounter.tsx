@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Timer } from '@phosphor-icons/react';
+import { Fire } from '@phosphor-icons/react';
 import { cn } from '@/lib/utils';
 import { useEnergyStore } from '@/store/useEnergyStore';
 import { GlowCard } from './GlowCard';
@@ -20,33 +20,31 @@ export function StreakCounter({ className }: StreakCounterProps) {
   return (
     <GlowCard
       className={cn('p-4', className)}
-      glowColor={isActive ? 'green' : 'cyan'}
+      glowColor={isActive ? 'success' : 'primary'}
     >
-      <div className="flex items-center gap-3">
-        <motion.div
-          animate={isActive ? { rotate: [0, 10, -10, 0] } : {}}
-          transition={{ duration: 2, repeat: Infinity }}
+      <div className="flex items-center gap-4">
+        <div
           className={cn(
-            'p-2 rounded-lg',
-            isActive ? 'bg-cyber-green/10 text-cyber-green' : 'bg-gray-800 text-gray-500'
+            'p-3 rounded-xl',
+            isActive ? 'bg-success-100 text-success-600' : 'bg-slate-100 text-slate-400'
           )}
         >
-          <Timer size={24} weight="fill" />
-        </motion.div>
+          <Fire size={28} weight={isActive ? 'fill' : 'regular'} />
+        </div>
 
         <div className="flex-1">
-          <span className="text-xs font-mono text-gray-500 uppercase tracking-wider block">
-            UPTIME
+          <span className="text-sm text-slate-500 block">
+            Current Streak
           </span>
-          <div className="flex items-baseline gap-1">
+          <div className="flex items-baseline gap-2">
             <AnimatedNumber
               value={streak}
               className={cn(
-                'text-2xl font-bold font-mono',
-                isActive ? 'text-cyber-green' : 'text-gray-400'
+                'text-3xl font-bold',
+                isActive ? 'text-success-600' : 'text-slate-400'
               )}
             />
-            <span className="text-sm font-mono text-gray-500">DAYS</span>
+            <span className="text-sm text-slate-500">days</span>
           </div>
         </div>
 
@@ -56,12 +54,12 @@ export function StreakCounter({ className }: StreakCounterProps) {
             animate={{ scale: isActive ? [1, 1.2, 1] : 1 }}
             transition={{ duration: 1, repeat: Infinity }}
             className={cn(
-              'h-2 w-2 rounded-full',
-              isActive ? 'bg-cyber-green' : 'bg-gray-600'
+              'h-3 w-3 rounded-full',
+              isActive ? 'bg-success-500' : 'bg-slate-300'
             )}
           />
-          <span className="text-[10px] font-mono text-gray-600 mt-1">
-            {isActive ? 'ACTIVE' : 'IDLE'}
+          <span className="text-xs text-slate-400 mt-1">
+            {isActive ? 'Active' : 'Start today!'}
           </span>
         </div>
       </div>
