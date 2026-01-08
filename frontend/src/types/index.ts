@@ -1,17 +1,17 @@
 export type ActionType = 
-  | 'SYSTEM_SYNCH'     // Focus Mode (Study > 6hr): +10
-  | 'HARDWARE_OPT'     // Physical Tuning (Workout): +5
-  | 'RESOURCE_DEPLOY'  // Spending Money: -X
-  | 'CORE_FAILURE'     // Relapse Type A: -15
-  | 'NETWORK_BREACH'   // Relapse Type B: -10
-  | 'POWER_LEAK';      // Relapse Type C: -5
+  | 'FOCUS_SESSION'    // Study/Focus > 6hr: +10
+  | 'WORKOUT'          // Physical Exercise: +5
+  | 'SPENDING'         // Spending Money: -X
+  | 'MAJOR_SETBACK'    // Major Relapse: -15
+  | 'MODERATE_SETBACK' // Moderate Relapse: -10
+  | 'MINOR_SETBACK';   // Minor Relapse: -5
 
 export interface ActionConfig {
   type: ActionType;
   label: string;
   points: number;
   icon: string;
-  color: 'cyan' | 'red' | 'amber' | 'green';
+  color: 'primary' | 'danger' | 'warning' | 'success';
   description: string;
 }
 
@@ -20,7 +20,7 @@ export interface LogEntry {
   type: ActionType;
   points: number;
   timestamp: Date;
-  amount?: number; // For RESOURCE_DEPLOY
+  amount?: number; // For SPENDING
 }
 
 export interface DayActivity {
@@ -30,52 +30,52 @@ export interface DayActivity {
 }
 
 export const ACTION_CONFIG: Record<ActionType, ActionConfig> = {
-  SYSTEM_SYNCH: {
-    type: 'SYSTEM_SYNCH',
-    label: 'SYSTEM_SYNCH',
+  FOCUS_SESSION: {
+    type: 'FOCUS_SESSION',
+    label: 'Focus Session',
     points: 10,
     icon: 'Lightning',
-    color: 'cyan',
-    description: 'Focus Mode > 6hr',
+    color: 'primary',
+    description: 'Deep work session (6+ hours)',
   },
-  HARDWARE_OPT: {
-    type: 'HARDWARE_OPT',
-    label: 'HARDWARE_OPT',
+  WORKOUT: {
+    type: 'WORKOUT',
+    label: 'Workout',
     points: 5,
     icon: 'Barbell',
-    color: 'green',
-    description: 'Physical Tuning',
+    color: 'success',
+    description: 'Physical exercise completed',
   },
-  RESOURCE_DEPLOY: {
-    type: 'RESOURCE_DEPLOY',
-    label: 'RESOURCE_DEPLOY',
+  SPENDING: {
+    type: 'SPENDING',
+    label: 'Spending',
     points: 0, // Variable
     icon: 'CurrencyDollar',
-    color: 'amber',
-    description: 'Resource Deployment',
+    color: 'warning',
+    description: 'Money spent',
   },
-  CORE_FAILURE: {
-    type: 'CORE_FAILURE',
-    label: 'CORE_FAILURE',
+  MAJOR_SETBACK: {
+    type: 'MAJOR_SETBACK',
+    label: 'Major Setback',
     points: -15,
     icon: 'Skull',
-    color: 'red',
-    description: 'Critical System Failure',
+    color: 'danger',
+    description: 'Major discipline failure',
   },
-  NETWORK_BREACH: {
-    type: 'NETWORK_BREACH',
-    label: 'NETWORK_BREACH',
+  MODERATE_SETBACK: {
+    type: 'MODERATE_SETBACK',
+    label: 'Moderate Setback',
     points: -10,
     icon: 'WifiSlash',
-    color: 'red',
-    description: 'Network Security Breach',
+    color: 'danger',
+    description: 'Moderate discipline failure',
   },
-  POWER_LEAK: {
-    type: 'POWER_LEAK',
-    label: 'POWER_LEAK',
+  MINOR_SETBACK: {
+    type: 'MINOR_SETBACK',
+    label: 'Minor Setback',
     points: -5,
     icon: 'BatteryWarning',
-    color: 'red',
-    description: 'Power Leak Detected',
+    color: 'danger',
+    description: 'Minor discipline failure',
   },
 };

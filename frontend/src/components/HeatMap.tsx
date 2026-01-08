@@ -11,19 +11,11 @@ interface HeatMapProps {
 }
 
 const levelColors = {
-  0: 'bg-gray-800/50',
-  1: 'bg-cyber-cyan/20',
-  2: 'bg-cyber-cyan/40',
-  3: 'bg-cyber-cyan/60',
-  4: 'bg-cyber-cyan/80',
-};
-
-const levelGlows = {
-  0: '',
-  1: 'shadow-[0_0_3px_rgba(0,255,255,0.2)]',
-  2: 'shadow-[0_0_5px_rgba(0,255,255,0.3)]',
-  3: 'shadow-[0_0_8px_rgba(0,255,255,0.4)]',
-  4: 'shadow-[0_0_12px_rgba(0,255,255,0.5)]',
+  0: 'bg-slate-100',
+  1: 'bg-primary-200',
+  2: 'bg-primary-300',
+  3: 'bg-primary-400',
+  4: 'bg-primary-500',
 };
 
 export function HeatMap({ className }: HeatMapProps) {
@@ -63,34 +55,33 @@ export function HeatMap({ className }: HeatMapProps) {
   const dayLabels = ['', 'Mon', '', 'Wed', '', 'Fri', ''];
 
   return (
-    <GlowCard className={cn('p-4', className)} glowColor="cyan">
+    <GlowCard className={cn('p-6', className)} glowColor="primary">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <span className="text-xs font-mono text-gray-500 uppercase tracking-wider">
-          ACTIVITY_DENSITY
+        <span className="text-sm font-medium text-slate-600">
+          Activity Overview
         </span>
         <div className="flex items-center gap-2">
-          <span className="text-xs font-mono text-gray-600">Less</span>
+          <span className="text-xs text-slate-400">Less</span>
           <div className="flex gap-1">
             {[0, 1, 2, 3, 4].map((level) => (
               <div
                 key={level}
                 className={cn(
                   'w-3 h-3 rounded-sm',
-                  levelColors[level as keyof typeof levelColors],
-                  levelGlows[level as keyof typeof levelGlows]
+                  levelColors[level as keyof typeof levelColors]
                 )}
               />
             ))}
           </div>
-          <span className="text-xs font-mono text-gray-600">More</span>
+          <span className="text-xs text-slate-400">More</span>
         </div>
       </div>
 
       {/* Heatmap grid */}
       <div className="flex gap-4">
         {/* Day labels */}
-        <div className="flex flex-col gap-[3px] text-xs font-mono text-gray-600 pt-5">
+        <div className="flex flex-col gap-[3px] text-xs text-slate-400 pt-5">
           {dayLabels.map((label, i) => (
             <div key={i} className="h-3 flex items-center">
               {label}
@@ -105,7 +96,7 @@ export function HeatMap({ className }: HeatMapProps) {
             {months.map((month, i) => (
               <div
                 key={i}
-                className="text-xs font-mono text-gray-600"
+                className="text-xs text-slate-400"
                 style={{
                   marginLeft:
                     i === 0
@@ -133,9 +124,8 @@ export function HeatMap({ className }: HeatMapProps) {
                       stiffness: 500,
                     }}
                     className={cn(
-                      'w-3 h-3 rounded-sm cursor-pointer transition-all duration-200 hover:ring-1 hover:ring-cyber-cyan/50',
-                      levelColors[day.level],
-                      levelGlows[day.level]
+                      'w-3 h-3 rounded-sm cursor-pointer transition-all duration-200 hover:ring-2 hover:ring-primary-300',
+                      levelColors[day.level]
                     )}
                     title={`${day.date}: ${day.count} activities`}
                   />

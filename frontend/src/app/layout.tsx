@@ -14,8 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "CANT_HURT_ME // SYSTEM MONITOR",
-  description: "Personal Discipline Tracking System",
+  title: "Cant Hurt Me - Discipline Tracker",
+  description: "Track your daily habits and build mental toughness",
 };
 
 export default function RootLayout({
@@ -24,9 +24,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-cyber-black min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-50 min-h-screen`}
       >
         {children}
       </body>
